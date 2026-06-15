@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hitaIA — Tu dinero trabajando mientras dormís</title>
+<meta name="description" content="hitaIA usa inteligencia artificial para operar en los mercados financieros por vos. Cripto, forex, acciones y materias primas. Empezá con $250.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Mgid Sensor -->
+<script type="text/javascript">
+    (function() {
+        var d = document, w = window;
+        w.MgSensorData = w.MgSensorData || [];
+        w.MgSensorData.push({ cid:980422, project: "a.mgid.com" });
+        var l = "a.mgid.com";
+        var n = d.getElementsByTagName("script")[0];
+        var s = d.createElement("script");
+        s.type = "text/javascript"; s.async = true;
+        var dt = !Date.now?new Date().valueOf():Date.now();
+        s.src = "https://" + l + "/mgsensor.js?d=" + dt;
+        n.parentNode.insertBefore(s, n);
+    })();
+</script>
+<!-- /Mgid Sensor -->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05070d;--bg2:#080c14;--bg3:#0d1220;
+  --cyan:#00d4ff;--cyan2:#00f0e0;--cyan-dark:#0090b0;
+  --border:#1a2535;--text:#eef2ff;--text2:#99a8c0;--muted:#4a5a72;
+  --green:#00e599;--red:#ff4560;
+  --r:12px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
+
+/* ── NOISE OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4}
+
+/* ── GLOW BG ── */
+.glow{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.glow-1{width:600px;height:600px;background:rgba(0,212,255,0.06);top:-200px;right:-100px}
+.glow-2{width:500px;height:500px;background:rgba(0,229,153,0.05);bottom:-150px;left:-100px}
+
+/* ── LAYOUT ── */
+.container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+section{position:relative;z-index:1}
+
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;border-bottom:1px solid rgba(0,212,255,0.08);background:rgba(5,7,13,0.85);backdrop-filter:blur(16px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--text);letter-spacing:-0.02em}
+.nav-logo span{color:var(--cyan)}
+.nav-cta{background:var(--cyan);color:#000;font-weight:700;font-size:13px;padding:8px 20px;border-radius:40px;text-decoration:none;transition:.2s;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+.nav-cta:hover{background:var(--cyan2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1fr 440px;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:40px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--cyan);letter-spacing:0.04em;margin-bottom:24px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,5vw,58px);line-height:1.08;letter-spacing:-0.03em;margin-bottom:20px}
+.hero h1 .line-cyan{color:var(--cyan)}
+.hero h1 .line-dim{color:var(--text2)}
+.hero-sub{font-size:17px;color:var(--text2);line-height:1.65;margin-bottom:32px;max-width:500px}
+.hero-proof{display:flex;gap:28px;flex-wrap:wrap}
+.proof-item{display:flex;flex-direction:column}
+.proof-val{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--text)}
+.proof-val .cyan{color:var(--cyan)}
+.proof-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+
+/* ── FORM CARD ── */
+.form-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;overflow:hidden}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2))}
+.form-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
+.form-sub span{color:var(--cyan);font-weight:600}
+.urgency{display:flex;align-items:center;gap:8px;background:rgba(255,69,96,0.08);border:1px solid rgba(255,69,96,0.2);border-radius:8px;padding:8px 12px;margin-bottom:20px;font-size:12px;color:#ff8fa0}
+.urgency-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;animation:blink 1s infinite}
+
+.field{margin-bottom:14px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px}
+.field input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:.2s}
+.field input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,212,255,0.08)}
+.field input::placeholder{color:var(--muted)}
+
+/* phone + country code */
+.phone-wrap{display:flex;gap:8px}
+.cc-btn{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0 12px;cursor:pointer;white-space:nowrap;font-size:13px;font-weight:600;color:var(--text);position:relative;transition:.2s;flex-shrink:0}
+.cc-btn:hover{border-color:var(--cyan)}
+.cc-btn .arrow{font-size:9px;color:var(--muted)}
+.cc-dropdown{position:absolute;top:calc(100% + 6px);left:0;width:240px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;z-index:50;display:none;box-shadow:0 16px 40px rgba(0,0,0,0.5);max-height:220px;overflow:hidden;flex-direction:column}
+.cc-dropdown.open{display:flex}
+.cc-search{border:none;border-bottom:1px solid var(--border);background:var(--bg3);color:var(--text);padding:10px 14px;font-size:13px;font-family:'Inter',sans-serif;outline:none;width:100%}
+.cc-list{overflow-y:auto;max-height:170px}
+.cc-item{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;font-size:13px;transition:.15s}
+.cc-item:hover{background:rgba(0,212,255,0.06)}
+.cc-item .code{color:var(--muted);font-size:12px;margin-left:auto}
+
+.consent-box{margin-bottom:16px}
+.consent-label{display:flex;gap:10px;cursor:pointer}
+.consent-check{width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:var(--cyan)}
+.consent-text{font-size:11px;color:var(--muted);line-height:1.5}
+.consent-text a{color:var(--cyan);text-decoration:none}
+.consent-text a:hover{text-decoration:underline}
+.consent-warn{font-size:11px;color:var(--red);margin-top:4px;display:none}
+
+.btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000;font-weight:800;font-size:15px;font-family:'Syne',sans-serif;border:none;border-radius:10px;cursor:pointer;transition:.2s;letter-spacing:0.01em;position:relative;overflow:hidden}
+.btn-submit::after{content:'';position:absolute;top:-50%;left:-60%;width:30%;height:200%;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.25) 50%,transparent 60%);transform:skewX(-15deg);transition:left 0.5s}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.3)}
+.btn-submit:hover::after{left:130%}
+.btn-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.form-guarantee{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:var(--muted)}
+.form-guarantee svg{opacity:0.5}
+
+/* ── TICKER ── */
+.ticker-wrap{background:rgba(0,212,255,0.04);border-top:1px solid rgba(0,212,255,0.08);border-bottom:1px solid rgba(0,212,255,0.08);padding:12px 0;overflow:hidden}
+.ticker-track{display:flex;gap:48px;animation:ticker 25s linear infinite;width:max-content}
+.ticker-item{display:flex;align-items:center;gap:8px;font-size:13px;white-space:nowrap;color:var(--text2)}
+.ticker-sym{font-weight:700;color:var(--text)}
+.ticker-up{color:var(--green)}
+.ticker-down{color:var(--red)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── WHY ── */
+.why{padding:80px 0}
+.why-header{text-align:center;margin-bottom:60px}
+.tag{display:inline-block;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.18);color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.why-header h2{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.02em}
+.why-header h2 span{color:var(--cyan)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.2s;position:relative;overflow:hidden}
+.card:hover{border-color:rgba(0,212,255,0.25);transform:translateY(-3px)}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.04),transparent);opacity:0;transition:.3s}
+.card:hover::before{opacity:1}
+.card-icon{font-size:32px;margin-bottom:16px}
+.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:8px}
+.card-desc{font-size:13px;color:var(--text2);line-height:1.6}
+.card-stat{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;font-weight:600;color:var(--cyan)}
+
+/* ── SOCIAL PROOF ── */
+.proof{padding:80px 0;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.proof-col{text-align:center;padding:20px;border-right:1px solid var(--border)}
+.proof-col:last-child{border-right:none}
+.proof-big{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--text)}
+.proof-big .c{color:var(--cyan)}
+.proof-small{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+
+/* ── HOW ── */
+.how{padding:80px 0}
+.how-header{text-align:center;margin-bottom:60px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps::before{content:'';position:absolute;top:28px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.3),transparent)}
+.step{text-align:center;padding:0 16px;position:relative}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--bg2);border:2px solid rgba(0,212,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--cyan);margin:0 auto 20px;position:relative;z-index:1}
+.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* ── TESTIMONIALS ── */
+.testi{padding:80px 0}
+.testi-header{text-align:center;margin-bottom:50px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative}
+.testi-card::before{content:'❝';position:absolute;top:16px;right:20px;font-size:48px;color:rgba(0,212,255,0.1);font-family:serif;line-height:1}
+.stars{color:var(--cyan);font-size:14px;margin-bottom:12px;letter-spacing:2px}
+.testi-text{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:20px}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#000}
+.testi-name{font-weight:700;font-size:13px}
+.testi-loc{font-size:11px;color:var(--muted)}
+.testi-pnl{font-weight:700;color:var(--green);font-size:12px}
+
+/* ── CTA FINAL ── */
+.cta-final{padding:80px 0;text-align:center}
+.cta-box{background:linear-gradient(135deg,rgba(0,212,255,0.07),rgba(0,229,153,0.05));border:1px solid rgba(0,212,255,0.18);border-radius:24px;padding:60px 40px;max-width:700px;margin:0 auto}
+.cta-box h2{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-0.02em;margin-bottom:14px}
+.cta-box p{color:var(--text2);font-size:16px;margin-bottom:32px}
+.btn-big{display:inline-block;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000;font-weight:800;font-size:16px;font-family:'Syne',sans-serif;padding:16px 40px;border-radius:50px;border:none;cursor:pointer;transition:.2s;text-decoration:none;letter-spacing:0.01em}
+.btn-big:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,212,255,0.3)}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;text-align:center}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--text);margin-bottom:12px}
+.footer-logo span{color:var(--cyan)}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:.2s}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{font-size:12px;color:var(--muted)}
+.disclaimer{font-size:11px;color:var(--muted);line-height:1.6;max-width:700px;margin:20px auto 0;opacity:0.7}
+
+/* ── MODAL LEGAL ── */
+.modal{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal.active{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px)}
+.modal-box{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;max-width:640px;width:100%;max-height:80vh;overflow-y:auto;z-index:1}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--bg3);border:none;color:var(--text2);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{color:var(--text)}
+.modal-box h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:16px;color:var(--cyan)}
+.modal-box p,.modal-box li{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+.modal-box h3{font-size:14px;font-weight:700;color:var(--text);margin:16px 0 6px}
+.modal-box ul{padding-left:18px}
+
+/* ── SUCCESS ── */
+.success-overlay{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px)}
+.success-overlay.active{display:flex}
+.success-box{background:var(--bg2);border:1px solid rgba(0,229,153,0.3);border-radius:20px;padding:48px 40px;text-align:center;max-width:420px}
+.success-icon{font-size:56px;margin-bottom:16px}
+.success-box h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:10px}
+.success-box p{color:var(--text2);font-size:14px;line-height:1.65}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .cards{grid-template-columns:1fr}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+  .proof-col:nth-child(2){border-right:none}
+  .steps{grid-template-columns:1fr 1fr;gap:32px}
+  .steps::before{display:none}
+  .testi-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .field-row{grid-template-columns:1fr}
+  .proof-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-logo">hita<span>IA</span></div>
+    <button class="nav-cta" onclick="scrollToForm()">Empezar ahora →</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Sistema activo — operando en 12 mercados ahora
+        </div>
+        <h1>
+          Tu dinero<br>
+          <span class="line-cyan">nunca duerme.</span><br>
+          <span class="line-dim">La IA tampoco.</span>
+        </h1>
+        <p class="hero-sub">hitaIA opera por vos en cripto, forex, oro, petróleo y acciones — las 24 horas, los 7 días. Vos solo mirás cómo crece tu cuenta.</p>
+        <div class="hero-proof">
+          <div class="proof-item">
+            <span class="proof-val"><span class="cyan">+3%</span></span>
+            <span class="proof-label">Rendimiento diario est.</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-val" id="liveUsers">2,847</span>
+            <span class="proof-label">Usuarios activos ahora</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-val">$250</span>
+            <span class="proof-label">Para empezar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div id="formSection">
+        <div class="form-card">
+          <div class="form-title">Creá tu cuenta gratis</div>
+          <div class="form-sub">Un asesor te contacta en <span>menos de 2 horas</span></div>
+
+          <div class="urgency">
+            <div class="urgency-dot"></div>
+            <span id="slotsText">Solo quedan <strong>7 lugares</strong> disponibles hoy</span>
+          </div>
+
+          <form id="hitaForm" onsubmit="handleSubmit(event)">
+            <div class="field">
+              <div class="field-row">
+                <div>
+                  <label>Nombre</label>
+                  <input type="text" id="hNombre" placeholder="Ej: Carlos" required>
+                </div>
+                <div>
+                  <label>Apellido</label>
+                  <input type="text" id="hApellido" placeholder="Ej: González" required>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="hEmail" placeholder="tu@email.com" required>
+            </div>
+            <div class="field">
+              <label>Teléfono</label>
+              <div class="phone-wrap">
+                <div class="cc-btn" id="ccBtn" onclick="toggleCC(event)">
+                  <span id="ccFlag">🇵🇾</span>
+                  <span id="ccCode">+595</span>
+                  <span class="arrow">▼</span>
+                  <div class="cc-dropdown" id="ccDropdown">
+                    <input class="cc-search" placeholder="Buscar país…" oninput="filterCC(this.value)" onclick="event.stopPropagation()">
+                    <div class="cc-list" id="ccList"></div>
+                  </div>
+                </div>
+                <input type="tel" id="hTelefono" placeholder="Número de teléfono" required style="flex:1">
+              </div>
+            </div>
+
+            <div class="consent-box">
+              <label class="consent-label">
+                <input type="checkbox" class="consent-check" id="hitaConsent">
+                <span class="consent-text">
+                  Acepto los <a href="#" onclick="openModal('terminos');return false">Términos y Condiciones</a>,
+                  la <a href="#" onclick="openModal('privacidad');return false">Política de Privacidad</a>
+                  y el <a href="#" onclick="openModal('riesgo');return false">Aviso de Riesgo</a>.
+                  Autorizo el tratamiento de mis datos. Confirmo ser mayor de 18 años.
+                </span>
+              </label>
+              <div class="consent-warn" id="consentWarn">⚠ Debés aceptar los términos para continuar.</div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+              Quiero empezar a ganar →
+            </button>
+          </form>
+
+          <div class="form-guarantee">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Sin costo de apertura · 100% seguro · Sin compromiso
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- WHY -->
+<section class="why">
+  <div class="container">
+    <div class="why-header">
+      <div class="tag">¿Por qué hitaIA?</div>
+      <h2>El mercado no espera.<br><span>Vos tampoco deberías.</span></h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">IA que nunca para</div>
+        <div class="card-desc">Nuestro algoritmo analiza más de 2 millones de señales por minuto en cripto, forex, acciones y materias primas. Mientras dormís, trabaja.</div>
+        <div class="card-stat">⚡ Reacción en milisegundos</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Rendimiento real</div>
+        <div class="card-desc">3% de rendimiento diario estimado. $1,000 en 30 días proyectan más de $2,400. Sin experiencia previa. Sin conocer los mercados.</div>
+        <div class="card-stat">📈 85% de operaciones exitosas</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">Tu capital, seguro</div>
+        <div class="card-desc">Stop-loss automático en cada operación. El algoritmo protege tu inversión antes de que las pérdidas lleguen al 2% diario. Sin sorpresas.</div>
+        <div class="card-stat">🔒 Gestión de riesgo automática</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF NUMBERS -->
+<section class="proof">
+  <div class="container">
+    <div class="proof-grid">
+      <div class="proof-col">
+        <div class="proof-big">+<span class="c">50k</span></div>
+        <div class="proof-small">Inversores activos</div>
+      </div>
+      <div class="proof-col">
+        <div class="proof-big"><span class="c">85</span>%</div>
+        <div class="proof-small">Precisión reportada</div>
+      </div>
+      <div class="proof-col">
+        <div class="proof-big"><span class="c">200</span>+</div>
+        <div class="proof-small">Activos disponibles</div>
+      </div>
+      <div class="proof-col">
+        <div class="proof-big"><span class="c">24</span>/7</div>
+        <div class="proof-small">Operación continua</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <div class="how-header">
+      <div class="tag">Proceso</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-0.02em;margin-top:12px">En 4 pasos, ya estás operando</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Registrate gratis</div>
+        <div class="step-desc">Completá el formulario. Un asesor te llama en menos de 2 horas para guiarte.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Depositá desde $250</div>
+        <div class="step-desc">Transferencia, tarjeta o cripto. Tu saldo queda disponible en minutos.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Elegí tu estrategia</div>
+        <div class="step-desc">Conservadora, balanceada o agresiva. La IA se adapta a tu perfil de riesgo.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Mirá cómo crece</div>
+        <div class="step-desc">El robot opera por vos 24/7. Vos solo seguís los resultados en tiempo real.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="container">
+    <div class="testi-header">
+      <div class="tag">Testimonios</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-0.02em;margin-top:12px">Lo que dicen nuestros usuarios</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Empecé con $500 y en el primer mes ya había recuperado la inversión. Ahora manejo $3,200 y sigo sumando. Lo que más me convenció fue que el asesor me explicó todo sin presionarme."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#00d4ff">R</div>
+          <div>
+            <div class="testi-name">Roberto M.</div>
+            <div class="testi-loc">Asunción, Paraguay</div>
+            <div class="testi-pnl">+$2,700 en 3 meses</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Nunca había invertido en nada. Con hitaIA no necesité saber nada de trading. El bot opera solo y yo recibo notificaciones. Simple, claro y funciona."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#00e599">L</div>
+          <div>
+            <div class="testi-name">Laura C.</div>
+            <div class="testi-loc">Córdoba, Argentina</div>
+            <div class="testi-pnl">+$1,890 en 2 meses</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Lo probé con el mínimo primero. Después de ver los resultados metí más capital. Hoy tengo $8,000 operando y los retiros llegaron sin problema. Recomiendo 100%."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#7c3aed">D</div>
+          <div>
+            <div class="testi-name">Diego F.</div>
+            <div class="testi-loc">Montevideo, Uruguay</div>
+            <div class="testi-pnl">+$4,200 en 4 meses</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Cada día que esperás es un día sin rendimiento</h2>
+      <p>Más de 50,000 inversores latinoamericanos ya están usando hitaIA. El sistema tiene capacidad limitada. Reservá tu lugar ahora.</p>
+      <button class="btn-big" onclick="scrollToForm()">Quiero mi cuenta gratis →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">hita<span>IA</span></div>
+    <div class="footer-links">
+      <a href="#" onclick="openModal('terminos');return false">Términos y Condiciones</a>
+      <a href="#" onclick="openModal('privacidad');return false">Política de Privacidad</a>
+      <a href="#" onclick="openModal('riesgo');return false">Aviso de Riesgo</a>
+    </div>
+    <div class="footer-copy">© 2025 hitaIA. Todos los derechos reservados.</div>
+    <div class="disclaimer">
+      <strong>Advertencia de riesgo:</strong> El trading de instrumentos financieros conlleva un alto nivel de riesgo y puede no ser adecuado para todos los inversores. Existe la posibilidad de perder todo o parte del capital invertido. El rendimiento pasado no garantiza resultados futuros. No invierta fondos que no pueda permitirse perder. Los rendimientos proyectados son estimaciones ilustrativas, no garantías.
+    </div>
+  </div>
+</footer>
+
+<!-- MODALES LEGALES -->
+<div class="modal" id="modal-terminos">
+  <div class="modal-bg" onclick="closeModal('terminos')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('terminos')">✕</button>
+    <h2>Términos y Condiciones</h2>
+    <h3>1. Aceptación</h3>
+    <p>Al registrarse en hitaIA, el Usuario acepta estos Términos en su totalidad. Si no está de acuerdo, no utilice el servicio.</p>
+    <h3>2. Descripción del servicio</h3>
+    <p>hitaIA es una plataforma de trading automatizado mediante algoritmos de inteligencia artificial que opera en mercados financieros incluyendo criptomonedas, forex, acciones y materias primas. hitaIA actúa como intermediaria tecnológica y no como asesor financiero regulado.</p>
+    <h3>3. Elegibilidad</h3>
+    <p>El servicio está disponible para personas mayores de 18 años con capacidad legal para contratar. Al registrarse, el Usuario declara y garantiza cumplir con estos requisitos.</p>
+    <h3>4. Depósitos y retiros</h3>
+    <p>El depósito mínimo es de $250 USD. El retiro mínimo es de $20 USD. Los tiempos de procesamiento son de 24 a 48 horas hábiles. hitaIA no cobra comisión por retiro.</p>
+    <h3>5. Riesgos</h3>
+    <p>El Usuario reconoce que el trading automatizado conlleva riesgos significativos, incluyendo la posible pérdida total del capital. hitaIA no garantiza rendimientos ni la preservación del capital.</p>
+    <h3>6. Propiedad intelectual</h3>
+    <p>Todos los algoritmos, interfaces y contenidos de hitaIA son propiedad exclusiva de la empresa. Queda prohibida su reproducción sin autorización expresa.</p>
+    <h3>7. Modificaciones</h3>
+    <p>hitaIA se reserva el derecho de modificar estos Términos en cualquier momento. Los cambios serán notificados por email con 15 días de anticipación.</p>
+  </div>
+</div>
+
+<div class="modal" id="modal-privacidad">
+  <div class="modal-bg" onclick="closeModal('privacidad')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('privacidad')">✕</button>
+    <h2>Política de Privacidad</h2>
+    <h3>1. Datos que recopilamos</h3>
+    <p>Nombre, apellido, email, teléfono, datos de uso de la plataforma e información técnica del dispositivo.</p>
+    <h3>2. Uso de los datos</h3>
+    <ul>
+      <li>Gestión de la cuenta y prestación del servicio</li>
+      <li>Comunicaciones relacionadas con su cuenta</li>
+      <li>Mejora del algoritmo y la plataforma</li>
+      <li>Cumplimiento de obligaciones legales (KYC/AML)</li>
+    </ul>
+    <h3>3. Compartición de datos</h3>
+    <p>No vendemos ni cedemos datos personales a terceros con fines comerciales. Podemos compartir datos con exchanges integrados, proveedores tecnológicos bajo confidencialidad y autoridades regulatorias cuando sea legalmente requerido.</p>
+    <h3>4. Seguridad</h3>
+    <p>Implementamos cifrado SSL/TLS, autenticación de dos factores y almacenamiento seguro. Sin embargo, ningún sistema es 100% infalible.</p>
+    <h3>5. Derechos del usuario</h3>
+    <p>Puede solicitar acceso, rectificación, eliminación y portabilidad de sus datos escribiendo a privacidad@hitaia.com.</p>
+    <h3>6. Cookies</h3>
+    <p>Utilizamos cookies técnicas necesarias para el funcionamiento del sitio y cookies analíticas para mejorar la experiencia. Puede configurar su navegador para rechazarlas.</p>
+  </div>
+</div>
+
+<div class="modal" id="modal-riesgo">
+  <div class="modal-bg" onclick="closeModal('riesgo')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('riesgo')">✕</button>
+    <h2>Aviso de Riesgo</h2>
+    <p><strong>IMPORTANTE: Lea este aviso detenidamente antes de invertir.</strong></p>
+    <h3>Alto riesgo de pérdida</h3>
+    <p>El trading de criptomonedas, divisas (forex), acciones y materias primas mediante apalancamiento es una actividad de alto riesgo especulativo. Existe la posibilidad real de perder la totalidad del capital invertido.</p>
+    <h3>Rendimientos no garantizados</h3>
+    <p>El rendimiento estimado del 3% diario es una proyección basada en datos históricos. No constituye una garantía de resultados futuros. Los mercados financieros son inherentemente impredecibles.</p>
+    <h3>Factores de riesgo principales</h3>
+    <ul>
+      <li><strong>Volatilidad extrema:</strong> Los precios pueden caer o subir más del 50% en horas.</li>
+      <li><strong>Riesgo tecnológico:</strong> Fallos técnicos pueden afectar la ejecución de operaciones.</li>
+      <li><strong>Riesgo de liquidez:</strong> En condiciones extremas puede ser imposible ejecutar órdenes al precio deseado.</li>
+      <li><strong>Riesgo regulatorio:</strong> Cambios legislativos pueden afectar el valor de los activos.</li>
+    </ul>
+    <h3>Recomendación</h3>
+    <p>Solo invierta capital que pueda permitirse perder completamente. Consulte con un asesor financiero independiente si tiene dudas. hitaIA no es un servicio de asesoramiento financiero regulado.</p>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon">🎉</div>
+    <h2 id="successName">¡Bienvenido!</h2>
+    <p>Tu solicitud fue recibida. Un asesor de hitaIA se comunicará con vos en <strong>menos de 2 horas</strong> para activar tu cuenta y comenzar a operar.</p>
+  </div>
+</div>
+
+<script>
+// ── WORKER URL ──
+var WORKER_URL = 'https://sieteia-hubspot.elvisrobertocaceres.workers.dev/';
+
+// ── COUNTRIES ──
+var COUNTRIES = [
+  {flag:'🇵🇾',name:'Paraguay',code:'+595'},
+  {flag:'🇦🇷',name:'Argentina',code:'+54'},
+  {flag:'🇧🇷',name:'Brasil',code:'+55'},
+  {flag:'🇧🇴',name:'Bolivia',code:'+591'},
+  {flag:'🇨🇱',name:'Chile',code:'+56'},
+  {flag:'🇨🇴',name:'Colombia',code:'+57'},
+  {flag:'🇨🇷',name:'Costa Rica',code:'+506'},
+  {flag:'🇨🇺',name:'Cuba',code:'+53'},
+  {flag:'🇩🇴',name:'Rep. Dominicana',code:'+1'},
+  {flag:'🇪🇨',name:'Ecuador',code:'+593'},
+  {flag:'🇸🇻',name:'El Salvador',code:'+503'},
+  {flag:'🇬🇹',name:'Guatemala',code:'+502'},
+  {flag:'🇭🇳',name:'Honduras',code:'+504'},
+  {flag:'🇲🇽',name:'México',code:'+52'},
+  {flag:'🇳🇮',name:'Nicaragua',code:'+505'},
+  {flag:'🇵🇦',name:'Panamá',code:'+507'},
+  {flag:'🇵🇪',name:'Perú',code:'+51'},
+  {flag:'🇵🇷',name:'Puerto Rico',code:'+1'},
+  {flag:'🇺🇾',name:'Uruguay',code:'+598'},
+  {flag:'🇻🇪',name:'Venezuela',code:'+58'},
+  {flag:'🇺🇸',name:'Estados Unidos',code:'+1'},
+  {flag:'🇪🇸',name:'España',code:'+34'},
+  {flag:'🇮🇹',name:'Italia',code:'+39'},
+  {flag:'🇩🇪',name:'Alemania',code:'+49'},
+  {flag:'🇫🇷',name:'Francia',code:'+33'},
+  {flag:'🇬🇧',name:'Reino Unido',code:'+44'},
+  {flag:'🇨🇦',name:'Canadá',code:'+1'},
+  {flag:'🇦🇺',name:'Australia',code:'+61'},
+];
+
+function renderCCList(filter) {
+  var list = COUNTRIES.filter(function(c){
+    return !filter || c.name.toLowerCase().includes(filter.toLowerCase()) || c.code.includes(filter);
+  });
+  document.getElementById('ccList').innerHTML = list.map(function(c){
+    return '<div class="cc-item" onclick="selectCC(\''+c.flag+'\',\''+c.code+'\',\''+c.name+'\')">'
+      +c.flag+' '+c.name+'<span class="code">'+c.code+'</span></div>';
+  }).join('');
+}
+renderCCList('');
+
+function filterCC(q){ renderCCList(q); }
+function selectCC(flag,code,name){
+  document.getElementById('ccFlag').textContent = flag;
+  document.getElementById('ccCode').textContent = code;
+  document.getElementById('ccDropdown').classList.remove('open');
+}
+function toggleCC(e){
+  e.stopPropagation();
+  document.getElementById('ccDropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(){
+  document.getElementById('ccDropdown').classList.remove('open');
+});
+
+// ── MODALES ──
+function openModal(id){
+  document.getElementById('modal-'+id).classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById('modal-'+id).classList.remove('active');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') ['terminos','privacidad','riesgo'].forEach(function(id){
+    document.getElementById('modal-'+id).classList.remove('active');
+    document.body.style.overflow='';
+  });
+});
+
+// ── FORM SUBMIT ──
+function handleSubmit(e) {
+  e.preventDefault();
+  var consent = document.getElementById('hitaConsent');
+  if (!consent.checked) {
+    document.getElementById('consentWarn').style.display = 'block';
+    return;
+  }
+  document.getElementById('consentWarn').style.display = 'none';
+
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  var payload = {
+    nombre:     document.getElementById('hNombre').value.trim(),
+    apellido:   document.getElementById('hApellido').value.trim(),
+    email:      document.getElementById('hEmail').value.trim(),
+    codigoPais: document.getElementById('ccCode').textContent.trim(),
+    telefono:   document.getElementById('hTelefono').value.trim(),
+  };
+
+  fetch(WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nombre: payload.nombre,
+      apellido: payload.apellido,
+      email: payload.email,
+      phone: payload.codigoPais + ' ' + payload.telefono
+    })
+  })
+  .then(function(res){
+    btn.disabled = false;
+    btn.textContent = 'Quiero empezar a ganar →';
+    var overlay = document.getElementById('successOverlay');
+    document.getElementById('successName').textContent = '¡Bienvenido, ' + payload.nombre + '!';
+    overlay.classList.add('active');
+    document.getElementById('hitaForm').reset();
+    consent.checked = false;
+    setTimeout(function(){ overlay.classList.remove('active'); }, 6000);
+  })
+  .catch(function(){
+    btn.disabled = false;
+    btn.textContent = 'Quiero empezar a ganar →';
+    alert('Error de conexión. Por favor intentá nuevamente.');
+  });
+}
+
+// ── SCROLL TO FORM ──
+function scrollToForm(){
+  document.getElementById('formSection').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// ── TICKER ──
+var tickerData = [
+  {sym:'BTC/USDT',price:'$63,921',change:'+2.1%',up:true},
+  {sym:'ETH/USDT',price:'$3,287',change:'+1.8%',up:true},
+  {sym:'XAU/USD',price:'$2,351',change:'+0.4%',up:true},
+  {sym:'EUR/USD',price:'$1.0853',change:'-0.2%',up:false},
+  {sym:'WTI',price:'$78.43',change:'+0.9%',up:true},
+  {sym:'SOL/USDT',price:'$142',change:'+3.2%',up:true},
+  {sym:'AAPL',price:'$189',change:'+0.6%',up:true},
+  {sym:'NVDA',price:'$875',change:'+1.4%',up:true},
+  {sym:'XRP/USDT',price:'$0.512',change:'-0.8%',up:false},
+  {sym:'S&P 500',price:'$5,230',change:'+0.3%',up:true},
+];
+var double = tickerData.concat(tickerData);
+var html = double.map(function(t){
+  return '<div class="ticker-item"><span class="ticker-sym">'+t.sym+'</span>'
+    +'<span>'+t.price+'</span>'
+    +'<span class="'+(t.up?'ticker-up':'ticker-down')+'">'+t.change+'</span></div>';
+}).join('');
+document.getElementById('tickerTrack').innerHTML = html;
+
+// ── LIVE USERS COUNTER ──
+var users = 2847;
+setInterval(function(){
+  users += Math.floor(Math.random()*3) - 1;
+  if (users < 2700) users = 2700;
+  document.getElementById('liveUsers').textContent = users.toLocaleString('es-PY');
+}, 5000);
+
+// ── URGENCY SLOTS ──
+var slots = 7;
+setInterval(function(){
+  if (slots > 2 && Math.random() < 0.3) {
+    slots--;
+    document.getElementById('slotsText').innerHTML = 'Solo quedan <strong>'+slots+' lugares</strong> disponibles hoy';
+  }
+}, 45000);
+</script>
+</body>
+</html>
