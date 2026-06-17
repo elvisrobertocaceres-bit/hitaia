@@ -592,6 +592,22 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
 // ── WORKER URL ──
 var WORKER_URL = 'https://sieteia-hubspot.elvisrobertocaceres.workers.dev/';
 
+// ── UTM + CLICK ID CAPTURE ──
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var keys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','mgid','ttclid','msclkid'];
+  var stored = {};
+  try { stored = JSON.parse(sessionStorage.getItem('hita_tracking') || '{}'); } catch(e){}
+  keys.forEach(function(k) {
+    if (params.get(k)) stored[k] = params.get(k);
+  });
+  sessionStorage.setItem('hita_tracking', JSON.stringify(stored));
+})();
+
+function getTracking() {
+  try { return JSON.parse(sessionStorage.getItem('hita_tracking') || '{}'); } catch(e) { return {}; }
+}
+
 // ── COUNTRIES ──
 var COUNTRIES = [
   {flag:'🇵🇾',name:'Paraguay',code:'+595'},
@@ -690,13 +706,13 @@ function handleSubmit(e) {
   fetch(WORKER_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+    body: JSON.stringify(Object.assign({
       nombre: payload.nombre,
       apellido: payload.apellido,
       email: payload.email,
       phone: payload.codigoPais + ' ' + payload.telefono,
       fuente: 'HitaIA'
-    })
+    }, getTracking()))
   })
   .then(function(res){
     btn.disabled = false;
