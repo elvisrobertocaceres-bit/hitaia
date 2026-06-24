@@ -50,12 +50,11 @@ nav{position:sticky;top:0;z-index:100;padding:14px 0;background:#fff;border-bott
 .nav-cta:hover{background:var(--yellow-dark);transform:translateY(-1px)}
 
 /* ── HERO ── */
-.hero{padding:50px 0 40px;background:#fff}
-.hero-grid{display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center}
-.hero-main{display:flex;align-items:center;gap:24px}
-.hero-img-wrap{flex:0 0 50%;max-width:50%}
-.hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center;display:block;-webkit-mask-image:radial-gradient(ellipse 74% 84% at 50% 48%,#000 50%,rgba(0,0,0,0) 88%);mask-image:radial-gradient(ellipse 74% 84% at 50% 48%,#000 50%,rgba(0,0,0,0) 88%)}
-.hero-copy{flex:1;text-align:center}
+.hero{position:relative;overflow:hidden;background:#fff}
+.hero-photo{position:absolute;left:0;top:0;height:100%;width:56%;object-fit:cover;object-position:left center;z-index:0}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to right,rgba(255,255,255,0) 20%,rgba(255,255,255,0.55) 31%,rgba(255,255,255,0.95) 42%,#fff 50%)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center;min-height:540px;padding:52px 0}
+.hero-copy{text-align:center;padding-left:54%}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--navy);letter-spacing:0.02em;margin-bottom:14px;text-transform:uppercase}
 .hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 1.4s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
@@ -220,13 +219,13 @@ footer{background:var(--ink);color:#fff;padding:44px 0;text-align:center}
 .success-box p{color:var(--gray);font-size:14px;line-height:1.65}
 
 @media(max-width:980px){
-  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .hero-grid{grid-template-columns:1fr;gap:28px;min-height:auto;padding:28px 0}
+  .hero-copy{padding-left:0}
   .hero-form-col .form-overlay:not(.popup){display:none}
+  .hero::after{display:none}
+  .hero-photo{position:static;width:100%;height:auto;-webkit-mask-image:linear-gradient(to bottom,#000 76%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(to bottom,#000 76%,rgba(0,0,0,0) 100%)}
 }
 @media(max-width:760px){
-  .hero{padding:32px 0 28px}
-  .hero-main{flex-direction:column;gap:20px}
-  .hero-img-wrap{flex:none;max-width:300px;width:100%}
   .hero h1{margin-bottom:20px}
   .hero-cta{width:100%;justify-content:center;padding:15px 24px}
   .cards{grid-template-columns:1fr}
@@ -271,20 +270,16 @@ footer{background:var(--ink);color:#fff;padding:44px 0;text-align:center}
 
 <!-- HERO -->
 <section class="hero">
+  <img class="hero-photo" alt="Invertí con HitaIA"
+       src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1000&q=80"
+       onerror="this.style.display='none'">
   <div class="container">
     <div class="hero-grid">
-      <!-- IZQUIERDA: imagen + título -->
-      <div class="hero-main">
-        <div class="hero-img-wrap">
-          <img class="hero-img" alt="Invertí con HitaIA"
-               src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80"
-               onerror="this.style.display='none'">
-        </div>
-        <div class="hero-copy">
-          <div class="hero-eyebrow"><span class="dot"></span>Sistema activo · operando ahora</div>
-          <h1>Invertí con <span class="hl">Inteligencia Artificial</span> Hoy y Dejá que tu Dinero Crezca Solo</h1>
-          <button class="hero-cta" onclick="openForm()">Estimación de beneficios</button>
-        </div>
+      <!-- IZQUIERDA: título -->
+      <div class="hero-copy">
+        <div class="hero-eyebrow"><span class="dot"></span>Sistema activo · operando ahora</div>
+        <h1>Invertí con <span class="hl">Inteligencia Artificial</span> Hoy y Dejá que tu Dinero Crezca Solo</h1>
+        <button class="hero-cta" onclick="openForm()">Estimación de beneficios</button>
       </div>
 
       <!-- DERECHA: formulario -->
