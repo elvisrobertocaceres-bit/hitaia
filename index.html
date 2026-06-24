@@ -639,7 +639,7 @@ var WORKER_URL = 'https://sieteia-hubspot.elvisrobertocaceres.workers.dev/';
 // ── UTM + CLICK ID CAPTURE ──
 (function() {
   var params = new URLSearchParams(window.location.search);
-  var keys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','mgid','ttclid','msclkid'];
+  var keys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','mgid','ttclid','msclkid','clickid','tblci'];
   var stored = {};
   try { stored = JSON.parse(sessionStorage.getItem('hita_tracking') || '{}'); } catch(e){}
   keys.forEach(function(k) {
