@@ -53,8 +53,8 @@ nav{position:sticky;top:0;z-index:100;padding:14px 0;background:#fff;border-bott
 .hero{padding:50px 0 40px;background:#fff}
 .hero-grid{display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center}
 .hero-main{display:flex;align-items:center;gap:24px}
-.hero-img-wrap{flex:0 0 42%;max-width:42%}
-.hero-img{width:100%;height:auto;display:block;border-radius:12px;object-fit:cover}
+.hero-img-wrap{flex:0 0 46%;max-width:46%}
+.hero-img{width:100%;height:auto;display:block;-webkit-mask-image:radial-gradient(ellipse 72% 84% at 52% 48%,#000 48%,rgba(0,0,0,0) 86%);mask-image:radial-gradient(ellipse 72% 84% at 52% 48%,#000 48%,rgba(0,0,0,0) 86%)}
 .hero-copy{flex:1;text-align:center}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--navy);letter-spacing:0.02em;margin-bottom:14px;text-transform:uppercase}
 .hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 1.4s infinite}
@@ -226,8 +226,7 @@ footer{background:var(--ink);color:#fff;padding:44px 0;text-align:center}
 @media(max-width:760px){
   .hero{padding:32px 0 28px}
   .hero-main{flex-direction:column;gap:20px}
-  .hero-img-wrap{flex:none;max-width:240px;width:100%}
-  .hero-img{border-radius:16px}
+  .hero-img-wrap{flex:none;max-width:300px;width:100%}
   .hero h1{margin-bottom:20px}
   .hero-cta{width:100%;justify-content:center;padding:15px 24px}
   .cards{grid-template-columns:1fr}
