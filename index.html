@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HitaIA — Tu dinero trabajando mientras dormís</title>
-<meta name="description" content="HitaIA usa inteligencia artificial para operar en los mercados financieros por vos. Cripto, forex, acciones y materias primas. Empezá con $250.">
+<title>HitaIA — Invertí con Inteligencia Artificial</title>
+<meta name="description" content="HitaIA usa inteligencia artificial para invertir por vos en los mercados financieros. Cripto, forex, acciones y materias primas. Empezá desde $250.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- Mgid Sensor -->
 <script type="text/javascript">
     (function() {
@@ -26,217 +27,246 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0800;--bg2:#110e00;--bg3:#1a1500;
-  --cyan:#f0b429;--cyan2:#ffd166;--cyan-dark:#b8860b;
-  --border:#2a2000;--text:#ffffff;--text2:#c8b87a;--muted:#7a6a3a;
-  --green:#4ade80;--red:#ff4560;
-  --r:12px;
+  --navy:#2c2a8e;--navy-dark:#1d1b66;--navy-light:#3b39a8;
+  --ink:#13132a;--gray:#5b6072;--gray-light:#8a8fa3;
+  --yellow:#ffe000;--yellow-dark:#ffd000;--yellow-soft:#fff7cc;
+  --bg:#ffffff;--bg-soft:#f4f6fb;--border:#e6e8f0;
+  --green:#16a34a;--red:#dc2626;
+  --r:14px;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
-
-/* ── NOISE OVERLAY ── */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4}
-
-/* ── GLOW BG ── */
-.glow{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
-.glow-1{width:600px;height:600px;background:rgba(240,180,41,0.08);top:-200px;right:-100px}
-.glow-2{width:500px;height:500px;background:rgba(255,209,102,0.06);bottom:-150px;left:-100px}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
 
 /* ── LAYOUT ── */
-.container{max-width:980px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-section{position:relative;z-index:1}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative}
+section{position:relative}
 
 /* ── NAVBAR ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;border-bottom:1px solid rgba(240,180,41,0.15);background:rgba(10,8,0,0.88);backdrop-filter:blur(16px)}
+nav{position:sticky;top:0;z-index:100;padding:14px 0;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 2px 12px rgba(20,20,42,0.04)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--text);letter-spacing:-0.02em}
-.nav-logo span{color:var(--cyan)}
-.nav-cta{background:#fff;color:#f5c800;font-weight:700;font-size:13px;padding:8px 20px;border-radius:40px;text-decoration:none;transition:.2s;border:none;cursor:pointer;font-family:'Inter',sans-serif}
-.nav-cta:hover{background:#f0f0f0;transform:translateY(-1px)}
+.nav-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:24px;color:var(--ink);letter-spacing:-0.02em}
+.nav-logo span{color:var(--navy)}
+.nav-cta{background:var(--yellow);color:var(--ink);font-weight:800;font-size:14px;padding:10px 24px;border-radius:8px;text-decoration:none;transition:.2s;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+.nav-cta:hover{background:var(--yellow-dark);transform:translateY(-1px)}
 
 /* ── HERO ── */
-.hero{min-height:100vh;display:flex;align-items:center;padding:100px 0 60px}
-.hero-grid{display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.3);border-radius:40px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--cyan);letter-spacing:0.04em;margin-bottom:24px}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.4s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.hero h1{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(28px,3.5vw,44px);line-height:1.2;letter-spacing:-0.01em;margin-bottom:20px}
-.hero h1 .line-cyan{color:var(--cyan)}
-.hero h1 .line-dim{color:var(--text2)}
-.hero-sub{font-size:17px;color:var(--text2);line-height:1.65;margin-bottom:32px;max-width:500px}
-.hero-proof{display:flex;gap:28px;flex-wrap:wrap}
-.proof-item{display:flex;flex-direction:column}
-.proof-val{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--text)}
-.proof-val .cyan{color:var(--cyan)}
-.proof-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+.hero{padding:50px 0 40px;background:#fff}
+.hero-grid{display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center}
+.hero-main{display:flex;align-items:center;gap:24px}
+.hero-img-wrap{flex:0 0 42%;max-width:42%}
+.hero-img{width:100%;height:auto;display:block;border-radius:12px;object-fit:cover}
+.hero-copy{flex:1;text-align:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--navy);letter-spacing:0.02em;margin-bottom:14px;text-transform:uppercase}
+.hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+.hero h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(30px,3.4vw,46px);line-height:1.08;letter-spacing:-0.01em;color:var(--ink);margin-bottom:24px}
+.hero h1 .hl{color:var(--navy)}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:#fff;font-family:'Inter',sans-serif;font-weight:800;font-size:16px;padding:15px 38px;border-radius:50px;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:.2s;box-shadow:0 10px 30px rgba(44,42,142,0.28)}
+.hero-cta:hover{background:var(--navy-dark);transform:translateY(-2px);box-shadow:0 14px 38px rgba(44,42,142,0.36)}
 
-/* ── FORM CARD ── */
-.form-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;overflow:hidden}
-.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f0b429,#ffd166)}
-.form-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px}
-.form-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
-.form-sub span{color:var(--cyan);font-weight:600}
-.urgency{display:flex;align-items:center;gap:8px;background:rgba(255,69,96,0.08);border:1px solid rgba(255,69,96,0.2);border-radius:8px;padding:8px 12px;margin-bottom:20px;font-size:12px;color:#ff8fa0}
-.urgency-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;animation:blink 1s infinite}
+/* ── BANNER NAVY ── */
+.band{background:var(--navy);color:#fff;text-align:center;padding:20px 0}
+.band p{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(17px,2.2vw,24px);letter-spacing:0.01em}
 
+/* ── FORM (inline + popup) ── */
+.form-overlay{position:relative}
+.form-overlay.popup{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(19,19,42,0.6);backdrop-filter:blur(5px);overflow-y:auto}
+.form-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(20,20,42,0.14);border:1px solid var(--border);width:100%}
+.form-overlay.popup .form-card{max-width:420px;animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.form-head{background:var(--yellow);padding:22px 28px;position:relative}
+.form-head h3{font-family:'Montserrat',sans-serif;font-weight:800;font-size:22px;color:var(--ink)}
+.form-close{display:none;position:absolute;top:14px;right:16px;width:30px;height:30px;border-radius:50%;background:rgba(19,19,42,0.12);border:none;color:var(--ink);font-size:15px;cursor:pointer;align-items:center;justify-content:center}
+.form-overlay.popup .form-close{display:flex}
+.form-body{padding:24px 28px 26px}
 .field{margin-bottom:14px}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px}
-.field input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:.2s}
-.field input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(240,180,41,0.12)}
-.field input::placeholder{color:var(--muted)}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.field input{width:100%;background:#fff;border:1px solid #cfd3e0;border-radius:8px;padding:12px 14px;color:var(--ink);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:.18s}
+.field input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(44,42,142,0.12)}
+.field input::placeholder{color:var(--gray-light)}
 
 /* phone + country code */
 .phone-wrap{display:flex;gap:8px}
-.cc-btn{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0 12px;cursor:pointer;white-space:nowrap;font-size:13px;font-weight:600;color:var(--text);position:relative;transition:.2s;flex-shrink:0}
-.cc-btn:hover{border-color:var(--cyan)}
-.cc-btn .arrow{font-size:9px;color:var(--muted)}
-.cc-dropdown{position:absolute;top:calc(100% + 6px);left:0;width:240px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;z-index:50;display:none;box-shadow:0 16px 40px rgba(0,0,0,0.5);max-height:220px;overflow:hidden;flex-direction:column}
+.cc-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #cfd3e0;border-radius:8px;padding:0 12px;cursor:pointer;white-space:nowrap;font-size:14px;font-weight:600;color:var(--ink);position:relative;transition:.18s;flex-shrink:0}
+.cc-btn:hover{border-color:var(--navy)}
+.cc-btn .arrow{font-size:9px;color:var(--gray-light)}
+.cc-dropdown{position:absolute;top:calc(100% + 6px);left:0;width:250px;background:#fff;border:1px solid var(--border);border-radius:10px;z-index:50;display:none;box-shadow:0 16px 40px rgba(20,20,42,0.18);max-height:230px;overflow:hidden;flex-direction:column}
 .cc-dropdown.open{display:flex}
-.cc-search{border:none;border-bottom:1px solid var(--border);background:var(--bg3);color:var(--text);padding:10px 14px;font-size:13px;font-family:'Inter',sans-serif;outline:none;width:100%}
-.cc-list{overflow-y:auto;max-height:170px}
-.cc-item{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;font-size:13px;transition:.15s}
-.cc-item:hover{background:rgba(240,180,41,0.07)}
-.cc-item .code{color:var(--muted);font-size:12px;margin-left:auto}
+.cc-search{border:none;border-bottom:1px solid var(--border);background:var(--bg-soft);color:var(--ink);padding:11px 14px;font-size:13px;font-family:'Inter',sans-serif;outline:none;width:100%}
+.cc-list{overflow-y:auto;max-height:180px}
+.cc-item{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;font-size:13px;transition:.15s;color:var(--ink)}
+.cc-item:hover{background:var(--bg-soft)}
+.cc-item .code{color:var(--gray-light);font-size:12px;margin-left:auto}
 
-.consent-box{margin-bottom:16px}
-.consent-label{display:flex;gap:10px;cursor:pointer}
-.consent-check{width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:var(--cyan)}
-.consent-text{font-size:11px;color:var(--muted);line-height:1.5}
-.consent-text a{color:var(--cyan);text-decoration:none}
-.consent-text a:hover{text-decoration:underline}
-.consent-warn{font-size:11px;color:var(--red);margin-top:4px;display:none}
-
-.btn-submit{width:100%;padding:14px;background:#fff;color:#f5c800;font-weight:700;font-size:15px;font-family:'Inter',sans-serif;border:none;border-radius:10px;cursor:pointer;transition:.2s;letter-spacing:0.02em;position:relative;overflow:hidden}
-.btn-submit::after{content:'';position:absolute;top:-50%;left:-60%;width:30%;height:200%;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.25) 50%,transparent 60%);transform:skewX(-15deg);transition:left 0.5s}
-.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(240,180,41,0.35)}
-.btn-submit:hover::after{left:130%}
+.btn-submit{width:100%;padding:15px;background:var(--yellow);color:var(--ink);font-weight:800;font-size:16px;font-family:'Inter',sans-serif;border:none;border-radius:9px;cursor:pointer;transition:.2s;letter-spacing:0.01em}
+.btn-submit:hover{background:var(--yellow-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,208,0,0.45)}
 .btn-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-.form-guarantee{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:var(--muted)}
-.form-guarantee svg{opacity:0.5}
+.form-fine{font-size:12px;color:var(--gray);line-height:1.55;text-align:center;margin-top:14px}
+.form-fine a{color:var(--navy);text-decoration:none;font-weight:600}
+.form-fine a:hover{text-decoration:underline}
+.consent-warn{font-size:12px;color:var(--red);margin-top:8px;text-align:center;display:none}
+.pay-row{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.pay-badge{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.02em}
+.pay-visa{color:#1a1f71}.pay-mc{color:#eb001b}.pay-pp{color:#003087}
+.pay-ssl{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--green);border:1px solid var(--green);border-radius:5px;padding:3px 7px}
 
-/* ── TICKER ── */
-.ticker-wrap{background:rgba(240,180,41,0.05);border-top:1px solid rgba(240,180,41,0.1);border-bottom:1px solid rgba(240,180,41,0.1);padding:12px 0;overflow:hidden}
-.ticker-track{display:flex;gap:48px;animation:ticker 25s linear infinite;width:max-content}
-.ticker-item{display:flex;align-items:center;gap:8px;font-size:13px;white-space:nowrap;color:var(--text2)}
-.ticker-sym{font-weight:700;color:var(--text)}
-.ticker-up{color:var(--green)}
-.ticker-down{color:var(--red)}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ── ROI CALCULATOR ── */
+.roi{padding:64px 0;background:var(--bg-soft)}
+.roi-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:40px;max-width:760px;margin:0 auto;box-shadow:0 12px 40px rgba(20,20,42,0.06)}
+.roi-card h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(22px,3vw,30px);color:var(--ink);text-align:center;margin-bottom:8px}
+.roi-card .roi-sub{text-align:center;color:var(--gray);margin-bottom:32px}
+.roi-amount{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:8px}
+.roi-amount .lbl{font-size:14px;color:var(--gray);font-weight:600}
+.roi-amount .val{font-family:'Montserrat',sans-serif;font-weight:900;font-size:38px;color:var(--ink)}
+.roi-slider-wrap{margin:24px 0 28px}
+.roi-slider{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--navy) var(--fill,5%),#e3e6f1 var(--fill,5%));outline:none}
+.roi-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--yellow);border:3px solid var(--navy);cursor:pointer;box-shadow:0 3px 10px rgba(44,42,142,0.3)}
+.roi-slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--yellow);border:3px solid var(--navy);cursor:pointer}
+.roi-ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--gray-light);margin-top:8px}
+.roi-result{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.roi-box{background:var(--bg-soft);border-radius:12px;padding:20px;text-align:center}
+.roi-box .rlbl{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:0.04em;font-weight:600;margin-bottom:6px}
+.roi-box .rval{font-family:'Montserrat',sans-serif;font-weight:900;font-size:30px;color:var(--navy)}
+.roi-box.profit .rval{color:var(--green)}
+.roi-note{font-size:11px;color:var(--gray-light);text-align:center;margin-bottom:22px}
+.roi-cta{display:block;width:100%;max-width:340px;margin:0 auto;text-align:center;background:var(--navy);color:#fff;font-weight:800;font-size:16px;padding:15px;border-radius:50px;border:none;cursor:pointer;transition:.2s}
+.roi-cta:hover{background:var(--navy-dark);transform:translateY(-2px)}
 
 /* ── WHY ── */
-.why{padding:80px 0}
-.why-header{text-align:center;margin-bottom:60px}
-.tag{display:inline-block;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.25);color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
-.why-header h2{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.02em}
-.why-header h2 span{color:var(--cyan)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.2s;position:relative;overflow:hidden}
-.card:hover{border-color:rgba(240,180,41,0.3);transform:translateY(-3px)}
-.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(240,180,41,0.05),transparent);opacity:0;transition:.3s}
-.card:hover::before{opacity:1}
-.card-icon{font-size:32px;margin-bottom:16px}
-.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:8px}
-.card-desc{font-size:13px;color:var(--text2);line-height:1.6}
-.card-stat{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;font-weight:600;color:var(--cyan)}
+.why{padding:72px 0;background:#fff}
+.why-header{text-align:center;margin-bottom:48px}
+.tag{display:inline-block;background:var(--yellow-soft);color:var(--navy);font-size:12px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+.why-header h2{font-family:'Montserrat',sans-serif;font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-0.01em;color:var(--ink)}
+.why-header h2 span{color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:30px;transition:.2s;box-shadow:0 6px 20px rgba(20,20,42,0.04)}
+.card:hover{border-color:var(--navy);transform:translateY(-4px);box-shadow:0 14px 36px rgba(44,42,142,0.12)}
+.card-icon{font-size:34px;margin-bottom:16px}
+.card-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:18px;margin-bottom:10px;color:var(--ink)}
+.card-desc{font-size:14px;color:var(--gray);line-height:1.65}
+.card-stat{margin-top:18px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;font-weight:700;color:var(--navy)}
 
-/* ── SOCIAL PROOF ── */
-.proof{padding:80px 0;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+/* ── PROOF NUMBERS ── */
+.proof{padding:60px 0;background:var(--navy);color:#fff}
 .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.proof-col{text-align:center;padding:20px;border-right:1px solid var(--border)}
+.proof-col{text-align:center;padding:16px;border-right:1px solid rgba(255,255,255,0.15)}
 .proof-col:last-child{border-right:none}
-.proof-big{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--text)}
-.proof-big .c{color:var(--cyan)}
-.proof-small{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+.proof-big{font-family:'Montserrat',sans-serif;font-size:42px;font-weight:900}
+.proof-big .c{color:var(--yellow)}
+.proof-small{font-size:12px;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px}
 
 /* ── HOW ── */
-.how{padding:80px 0}
-.how-header{text-align:center;margin-bottom:60px}
+.how{padding:72px 0;background:#fff}
+.how-header{text-align:center;margin-bottom:50px}
+.how-header h2{font-family:'Montserrat',sans-serif;font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-0.01em;color:var(--ink);margin-top:12px}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
-.steps::before{content:'';position:absolute;top:28px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(240,180,41,0.35),transparent)}
+.steps::before{content:'';position:absolute;top:28px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
 .step{text-align:center;padding:0 16px;position:relative}
-.step-num{width:56px;height:56px;border-radius:50%;background:var(--bg2);border:2px solid rgba(240,180,41,0.35);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--cyan);margin:0 auto 20px;position:relative;z-index:1}
-.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:8px}
-.step-desc{font-size:13px;color:var(--text2);line-height:1.55}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:900;font-size:20px;color:#fff;margin:0 auto 20px;position:relative;z-index:1}
+.step-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;margin-bottom:8px;color:var(--ink)}
+.step-desc{font-size:13px;color:var(--gray);line-height:1.55}
 
 /* ── TESTIMONIALS ── */
-.testi{padding:80px 0}
-.testi-header{text-align:center;margin-bottom:50px}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.testi-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative}
-.testi-card::before{content:'❝';position:absolute;top:16px;right:20px;font-size:48px;color:rgba(240,180,41,0.12);font-family:serif;line-height:1}
-.stars{color:var(--cyan);font-size:14px;margin-bottom:12px;letter-spacing:2px}
-.testi-text{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:20px}
+.testi{padding:72px 0;background:var(--bg-soft)}
+.testi-header{text-align:center;margin-bottom:48px}
+.testi-header h2{font-family:'Montserrat',sans-serif;font-size:clamp(24px,3.4vw,36px);font-weight:800;letter-spacing:-0.01em;color:var(--ink);margin-top:12px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testi-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 6px 20px rgba(20,20,42,0.04)}
+.stars{color:#f5b700;font-size:15px;margin-bottom:12px;letter-spacing:2px}
+.testi-text{font-size:14px;color:var(--gray);line-height:1.65;margin-bottom:20px}
 .testi-author{display:flex;align-items:center;gap:12px}
-.testi-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#000}
-.testi-name{font-weight:700;font-size:13px}
-.testi-loc{font-size:11px;color:var(--muted)}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;color:#fff}
+.testi-name{font-weight:700;font-size:14px;color:var(--ink)}
+.testi-loc{font-size:12px;color:var(--gray-light)}
 .testi-pnl{font-weight:700;color:var(--green);font-size:12px}
 
 /* ── CTA FINAL ── */
-.cta-final{padding:80px 0;text-align:center}
-.cta-box{background:linear-gradient(135deg,rgba(240,180,41,0.08),rgba(255,209,102,0.06));border:1px solid rgba(240,180,41,0.25);border-radius:24px;padding:60px 40px;max-width:700px;margin:0 auto}
-.cta-box h2{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-0.02em;margin-bottom:14px}
-.cta-box p{color:var(--text2);font-size:16px;margin-bottom:32px}
-.btn-big{display:inline-block;background:#fff;color:#f5c800;font-weight:700;font-size:16px;font-family:'Inter',sans-serif;padding:16px 40px;border-radius:50px;border:none;cursor:pointer;transition:.2s;text-decoration:none;letter-spacing:0.02em}
-.btn-big:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(240,180,41,0.35)}
+.cta-final{padding:72px 0;background:#fff;text-align:center}
+.cta-box{background:var(--navy);border-radius:24px;padding:56px 40px;max-width:760px;margin:0 auto}
+.cta-box h2{font-family:'Montserrat',sans-serif;font-size:clamp(24px,3.6vw,38px);font-weight:900;letter-spacing:-0.01em;margin-bottom:14px;color:#fff}
+.cta-box p{color:rgba(255,255,255,0.85);font-size:16px;margin-bottom:30px}
+.btn-big{display:inline-block;background:var(--yellow);color:var(--ink);font-weight:800;font-size:17px;font-family:'Inter',sans-serif;padding:16px 44px;border-radius:50px;border:none;cursor:pointer;transition:.2s;text-decoration:none}
+.btn-big:hover{background:var(--yellow-dark);transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,208,0,0.4)}
 
 /* ── FOOTER ── */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;text-align:center}
-.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--text);margin-bottom:12px}
-.footer-logo span{color:var(--cyan)}
+footer{background:var(--ink);color:#fff;padding:44px 0;text-align:center}
+.footer-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:#fff;margin-bottom:14px}
+.footer-logo span{color:var(--yellow)}
 .footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap}
-.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:.2s}
-.footer-links a:hover{color:var(--text)}
-.footer-copy{font-size:12px;color:var(--muted)}
-.disclaimer{font-size:11px;color:var(--muted);line-height:1.6;max-width:700px;margin:20px auto 0;opacity:0.7}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:.2s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.5)}
+.disclaimer{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;max-width:760px;margin:20px auto 0}
 
 /* ── MODAL LEGAL ── */
-.modal{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal{display:none;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;padding:20px}
 .modal.active{display:flex}
-.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px)}
-.modal-box{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;max-width:640px;width:100%;max-height:80vh;overflow-y:auto;z-index:1}
-.modal-close{position:absolute;top:16px;right:16px;background:var(--bg3);border:none;color:var(--text2);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.2s}
-.modal-close:hover{color:var(--text)}
-.modal-box h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:16px;color:var(--cyan)}
-.modal-box p,.modal-box li{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px}
-.modal-box h3{font-size:14px;font-weight:700;color:var(--text);margin:16px 0 6px}
+.modal-bg{position:absolute;inset:0;background:rgba(19,19,42,0.55);backdrop-filter:blur(5px)}
+.modal-box{position:relative;background:#fff;border-radius:16px;padding:36px;max-width:640px;width:100%;max-height:82vh;overflow-y:auto;z-index:1;box-shadow:0 24px 60px rgba(20,20,42,0.3)}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--bg-soft);border:none;color:var(--gray);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{background:var(--border);color:var(--ink)}
+.modal-box h2{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;margin-bottom:16px;color:var(--navy)}
+.modal-box p,.modal-box li{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:10px}
+.modal-box h3{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 6px}
 .modal-box ul{padding-left:18px}
 
 /* ── SUCCESS ── */
-.success-overlay{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px)}
+.success-overlay{display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;background:rgba(19,19,42,0.7);backdrop-filter:blur(6px)}
 .success-overlay.active{display:flex}
-.success-box{background:var(--bg2);border:1px solid rgba(240,180,41,0.35);border-radius:20px;padding:48px 40px;text-align:center;max-width:420px}
+.success-box{background:#fff;border-radius:20px;padding:48px 40px;text-align:center;max-width:420px;box-shadow:0 24px 60px rgba(20,20,42,0.3)}
 .success-icon{font-size:56px;margin-bottom:16px}
-.success-box h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:10px}
-.success-box p{color:var(--text2);font-size:14px;line-height:1.65}
+.success-box h2{font-family:'Montserrat',sans-serif;font-size:26px;font-weight:900;margin-bottom:10px;color:var(--ink)}
+.success-box p{color:var(--gray);font-size:14px;line-height:1.65}
 
-@media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:40px}
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .hero-form-col .form-overlay:not(.popup){display:none}
+}
+@media(max-width:760px){
+  .hero{padding:32px 0 28px}
+  .hero-main{flex-direction:column;gap:20px}
+  .hero-img-wrap{flex:none;max-width:240px;width:100%}
+  .hero-img{border-radius:16px}
+  .hero h1{margin-bottom:20px}
+  .hero-cta{width:100%;justify-content:center;padding:15px 24px}
   .cards{grid-template-columns:1fr}
-  .proof-grid{grid-template-columns:repeat(2,1fr)}
-  .proof-col:nth-child(2){border-right:none}
+  .why,.how,.testi{padding:52px 0}
+  .roi{padding:44px 0}
+  .roi-card{padding:28px 20px}
+  .proof{padding:44px 0}
+  .proof-grid{grid-template-columns:repeat(2,1fr);gap:24px 0}
+  .proof-col{border-right:none}
+  .proof-big{font-size:36px}
   .steps{grid-template-columns:1fr 1fr;gap:32px}
   .steps::before{display:none}
   .testi-grid{grid-template-columns:1fr}
+  .roi-result{grid-template-columns:1fr}
+  .cta-box{padding:44px 24px}
 }
-@media(max-width:560px){
+@media(max-width:480px){
+  .container{padding:0 16px}
+  .hero h1{font-size:27px;line-height:1.12}
+  .nav-logo{font-size:21px}
+  .nav-cta{padding:9px 16px;font-size:13px}
   .field-row{grid-template-columns:1fr}
   .proof-grid{grid-template-columns:1fr 1fr}
+  .band p{font-size:17px}
+  .form-head{padding:18px 22px}
+  .form-head h3{font-size:20px}
+  .form-body{padding:20px 22px 22px}
+  .roi-amount .val{font-size:32px}
+  .roi-box .rval{font-size:26px}
 }
 </style>
 </head>
 <body>
 
-<div class="glow glow-1"></div>
-<div class="glow glow-2"></div>
-
 <!-- NAVBAR -->
 <nav>
   <div class="container nav-inner">
     <div class="nav-logo">Hita<span>IA</span></div>
-    <button class="nav-cta" onclick="scrollToForm()">Empezar ahora →</button>
+    <button class="nav-cta" onclick="openForm()">Comenzá gratis</button>
   </div>
 </nav>
 
@@ -244,98 +274,83 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
-      <div>
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          Sistema activo — operando en 12 mercados ahora
+      <!-- IZQUIERDA: imagen + título -->
+      <div class="hero-main">
+        <div class="hero-img-wrap">
+          <img class="hero-img" alt="Invertí con HitaIA"
+               src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80"
+               onerror="this.style.display='none'">
         </div>
-        <h1>
-          Tu dinero<br>
-          <span class="line-cyan">nunca duerme.</span><br>
-          <span class="line-dim">La IA tampoco.</span>
-        </h1>
-        <p class="hero-sub">HitaIA opera por vos en cripto, forex, oro, petróleo y acciones — las 24 horas, los 7 días. Vos solo mirás cómo crece tu cuenta.</p>
-        <div class="hero-proof">
-          <div class="proof-item">
-            <span class="proof-val"><span class="cyan">+3%</span></span>
-            <span class="proof-label">Rendimiento diario est.</span>
-          </div>
-          <div class="proof-item">
-            <span class="proof-val" id="liveUsers">2,847</span>
-            <span class="proof-label">Usuarios activos ahora</span>
-          </div>
-          <div class="proof-item">
-            <span class="proof-val">$250</span>
-            <span class="proof-label">Para empezar</span>
-          </div>
+        <div class="hero-copy">
+          <div class="hero-eyebrow"><span class="dot"></span>Sistema activo · operando ahora</div>
+          <h1>Invertí con <span class="hl">Inteligencia Artificial</span> Hoy y Dejá que tu Dinero Crezca Solo</h1>
+          <button class="hero-cta" onclick="openForm()">Estimación de beneficios</button>
         </div>
       </div>
 
-      <!-- FORM -->
-      <div id="formSection">
-        <div class="form-card">
-          <div class="form-title">Creá tu cuenta gratis</div>
-          <div class="form-sub">Un asesor te contacta en <span>menos de 2 horas</span></div>
-
-          <div class="urgency">
-            <div class="urgency-dot"></div>
-            <span id="slotsText">Solo quedan <strong>7 lugares</strong> disponibles hoy</span>
-          </div>
-
-          <form id="hitaForm" onsubmit="handleSubmit(event)">
-            <div class="field">
-              <div class="field-row">
-                <div>
-                  <label>Nombre</label>
-                  <input type="text" id="hNombre" placeholder="Ej: Carlos" required>
-                </div>
-                <div>
-                  <label>Apellido</label>
-                  <input type="text" id="hApellido" placeholder="Ej: González" required>
-                </div>
-              </div>
+      <!-- DERECHA: formulario -->
+      <div class="hero-form-col">
+        <div class="form-overlay" id="formOverlay">
+          <div class="form-card">
+            <div class="form-head">
+              <h3>Invertí con HitaIA</h3>
+              <button class="form-close" onclick="closeForm()" aria-label="Cerrar">✕</button>
             </div>
-            <div class="field">
-              <label>Email</label>
-              <input type="email" id="hEmail" placeholder="tu@email.com" required>
-            </div>
-            <div class="field">
-              <label>Teléfono</label>
-              <div class="phone-wrap">
-                <div class="cc-btn" id="ccBtn" onclick="toggleCC(event)">
-                  <span id="ccFlag">🇵🇾</span>
-                  <span id="ccCode">+595</span>
-                  <span class="arrow">▼</span>
-                  <div class="cc-dropdown" id="ccDropdown">
-                    <input class="cc-search" placeholder="Buscar país…" oninput="filterCC(this.value)" onclick="event.stopPropagation()">
-                    <div class="cc-list" id="ccList"></div>
+            <div class="form-body">
+              <form id="hitaForm" onsubmit="handleSubmit(event)">
+                <div class="field">
+                  <div class="field-row">
+                    <div>
+                      <label>Nombre</label>
+                      <input type="text" id="hNombre" placeholder="P. Ej. Juan" required>
+                    </div>
+                    <div>
+                      <label>Apellido</label>
+                      <input type="text" id="hApellido" placeholder="P. Ej. Lander" required>
+                    </div>
                   </div>
                 </div>
-                <input type="tel" id="hTelefono" placeholder="Número de teléfono" required style="flex:1">
+                <div class="field">
+                  <label>Correo electrónico</label>
+                  <input type="email" id="hEmail" placeholder="P. Ej. name@gmail.com" required>
+                </div>
+                <div class="field">
+                  <label>Número de Teléfono</label>
+                  <div class="phone-wrap">
+                    <div class="cc-btn" id="ccBtn" onclick="toggleCC(event)">
+                      <span id="ccFlag">🇵🇾</span>
+                      <span id="ccCode">+595</span>
+                      <span class="arrow">▼</span>
+                      <div class="cc-dropdown" id="ccDropdown">
+                        <input class="cc-search" placeholder="Buscar país…" oninput="filterCC(this.value)" onclick="event.stopPropagation()">
+                        <div class="cc-list" id="ccList"></div>
+                      </div>
+                    </div>
+                    <input type="tel" id="hTelefono" placeholder="0961 456789" required style="flex:1">
+                  </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                  Solicitar información
+                </button>
+                <div class="consent-warn" id="consentWarn">⚠ Ocurrió un error. Intentá nuevamente.</div>
+              </form>
+
+              <p class="form-fine">
+                Para invertir, debés ser mayor de 18 años. Capital mínimo requerido: $250.
+                Al solicitar información aceptás los
+                <a href="#" onclick="openModal('terminos');return false">Términos</a>,
+                la <a href="#" onclick="openModal('privacidad');return false">Privacidad</a>
+                y el <a href="#" onclick="openModal('riesgo');return false">Aviso de Riesgo</a>.
+              </p>
+
+              <div class="pay-row">
+                <span class="pay-badge pay-visa">VISA</span>
+                <span class="pay-badge pay-mc">mastercard</span>
+                <span class="pay-badge pay-pp">PayPal</span>
+                <span class="pay-ssl">🔒 SSL</span>
               </div>
             </div>
-
-            <div class="consent-box">
-              <label class="consent-label">
-                <input type="checkbox" class="consent-check" id="hitaConsent">
-                <span class="consent-text">
-                  Acepto los <a href="#" onclick="openModal('terminos');return false">Términos y Condiciones</a>,
-                  la <a href="#" onclick="openModal('privacidad');return false">Política de Privacidad</a>
-                  y el <a href="#" onclick="openModal('riesgo');return false">Aviso de Riesgo</a>.
-                  Autorizo el tratamiento de mis datos. Confirmo ser mayor de 18 años.
-                </span>
-              </label>
-              <div class="consent-warn" id="consentWarn">⚠ Debés aceptar los términos para continuar.</div>
-            </div>
-
-            <button type="submit" class="btn-submit" id="submitBtn">
-              Quiero empezar a ganar →
-            </button>
-          </form>
-
-          <div class="form-guarantee">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Sin costo de apertura · 100% seguro · Sin compromiso
           </div>
         </div>
       </div>
@@ -343,17 +358,52 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="tickerTrack"></div>
+<!-- BANDA NAVY -->
+<div class="band">
+  <div class="container">
+    <p>Una de las Plataformas de Inversión con IA Líderes en Latinoamérica</p>
+  </div>
 </div>
+
+<!-- ROI CALCULATOR -->
+<section class="roi">
+  <div class="container">
+    <div class="roi-card">
+      <h2>Descubrí tus ingresos potenciales a corto plazo (máx. 2 meses)</h2>
+      <p class="roi-sub">Movés el monto que querés invertir y mirás la proyección estimada.</p>
+
+      <div class="roi-amount">
+        <span class="lbl">Invertís</span>
+        <span class="val" id="roiDeposit">$250</span>
+      </div>
+      <div class="roi-slider-wrap">
+        <input type="range" min="250" max="10000" step="50" value="250" class="roi-slider" id="roiSlider" oninput="updateRoi()">
+        <div class="roi-ticks"><span>$250</span><span>$5,000</span><span>$10,000</span></div>
+      </div>
+
+      <div class="roi-result">
+        <div class="roi-box">
+          <div class="rlbl">Saldo proyectado</div>
+          <div class="rval" id="roiBalance">$450</div>
+        </div>
+        <div class="roi-box profit">
+          <div class="rlbl">Ganancia estimada</div>
+          <div class="rval" id="roiProfit">+$200</div>
+        </div>
+      </div>
+      <p class="roi-note">Estimación ilustrativa a 60 días · no constituye una garantía de resultados.</p>
+
+      <button class="roi-cta" onclick="openForm()">Quiero empezar a invertir →</button>
+    </div>
+  </div>
+</section>
 
 <!-- WHY -->
 <section class="why">
   <div class="container">
     <div class="why-header">
       <div class="tag">¿Por qué HitaIA?</div>
-      <h2>El mercado no espera.<br><span>Vos tampoco deberías.</span></h2>
+      <h2>El mercado no espera. <span>Vos tampoco deberías.</span></h2>
     </div>
     <div class="cards">
       <div class="card">
@@ -365,13 +415,13 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
       <div class="card">
         <div class="card-icon">📊</div>
         <div class="card-title">Rendimiento real</div>
-        <div class="card-desc">3% de rendimiento diario estimado. $1,000 en 30 días proyectan más de $2,400. Sin experiencia previa. Sin conocer los mercados.</div>
+        <div class="card-desc">Rendimiento diario estimado. Sin experiencia previa y sin necesidad de conocer los mercados financieros.</div>
         <div class="card-stat">📈 85% de operaciones exitosas</div>
       </div>
       <div class="card">
         <div class="card-icon">🛡️</div>
         <div class="card-title">Tu capital, seguro</div>
-        <div class="card-desc">Stop-loss automático en cada operación. El algoritmo protege tu inversión antes de que las pérdidas lleguen al 2% diario. Sin sorpresas.</div>
+        <div class="card-desc">Stop-loss automático en cada operación. El algoritmo protege tu inversión antes de que las pérdidas avancen. Sin sorpresas.</div>
         <div class="card-stat">🔒 Gestión de riesgo automática</div>
       </div>
     </div>
@@ -407,7 +457,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
   <div class="container">
     <div class="how-header">
       <div class="tag">Proceso</div>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-0.02em;margin-top:12px">En 4 pasos, ya estás operando</h2>
+      <h2>En 4 pasos, ya estás invirtiendo</h2>
     </div>
     <div class="steps">
       <div class="step">
@@ -428,7 +478,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-title">Mirá cómo crece</div>
-        <div class="step-desc">El robot opera por vos 24/7. Vos solo seguís los resultados en tiempo real.</div>
+        <div class="step-desc">La IA opera por vos 24/7. Vos solo seguís los resultados en tiempo real.</div>
       </div>
     </div>
   </div>
@@ -439,14 +489,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
   <div class="container">
     <div class="testi-header">
       <div class="tag">Testimonios</div>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-0.02em;margin-top:12px">Lo que dicen nuestros usuarios</h2>
+      <h2>Lo que dicen nuestros usuarios</h2>
     </div>
     <div class="testi-grid">
       <div class="testi-card">
         <div class="stars">★★★★★</div>
-        <p class="testi-text">"Empecé con $500 y en el primer mes ya había recuperado la inversión. Ahora manejo $3,200 y sigo sumando. Lo que más me convenció fue que el asesor me explicó todo sin presionarme."</p>
+        <p class="testi-text">"Empecé con $500 y en el primer mes ya había recuperado la inversión. Lo que más me convenció fue que el asesor me explicó todo sin presionarme."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:#00d4ff">R</div>
+          <div class="testi-avatar" style="background:#2c2a8e">R</div>
           <div>
             <div class="testi-name">Roberto M.</div>
             <div class="testi-loc">Asunción, Paraguay</div>
@@ -456,9 +506,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
       </div>
       <div class="testi-card">
         <div class="stars">★★★★★</div>
-        <p class="testi-text">"Nunca había invertido en nada. Con HitaIA no necesité saber nada de trading. El bot opera solo y yo recibo notificaciones. Simple, claro y funciona."</p>
+        <p class="testi-text">"Nunca había invertido en nada. Con HitaIA no necesité saber nada de trading. La IA opera sola y yo recibo notificaciones. Simple y funciona."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:#00e599">L</div>
+          <div class="testi-avatar" style="background:#16a34a">L</div>
           <div>
             <div class="testi-name">Laura C.</div>
             <div class="testi-loc">Córdoba, Argentina</div>
@@ -468,7 +518,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
       </div>
       <div class="testi-card">
         <div class="stars">★★★★★</div>
-        <p class="testi-text">"Lo probé con el mínimo primero. Después de ver los resultados metí más capital. Hoy tengo $8,000 operando y los retiros llegaron sin problema. Recomiendo 100%."</p>
+        <p class="testi-text">"Lo probé con el mínimo primero. Después de ver los resultados metí más capital. Los retiros llegaron sin problema. Recomiendo 100%."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:#7c3aed">D</div>
           <div>
@@ -488,7 +538,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
     <div class="cta-box">
       <h2>Cada día que esperás es un día sin rendimiento</h2>
       <p>Más de 50,000 inversores latinoamericanos ya están usando HitaIA. El sistema tiene capacidad limitada. Reservá tu lugar ahora.</p>
-      <button class="btn-big" onclick="scrollToForm()">Quiero mi cuenta gratis →</button>
+      <button class="btn-big" onclick="openForm()">Quiero mi cuenta gratis →</button>
     </div>
   </div>
 </section>
@@ -566,7 +616,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
     <h3>Alto riesgo de pérdida</h3>
     <p>El trading de criptomonedas, divisas (forex), acciones y materias primas mediante apalancamiento es una actividad de alto riesgo especulativo. Existe la posibilidad real de perder la totalidad del capital invertido.</p>
     <h3>Rendimientos no garantizados</h3>
-    <p>El rendimiento estimado del 3% diario es una proyección basada en datos históricos. No constituye una garantía de resultados futuros. Los mercados financieros son inherentemente impredecibles.</p>
+    <p>Los rendimientos estimados son proyecciones basadas en datos históricos. No constituyen una garantía de resultados futuros. Los mercados financieros son inherentemente impredecibles.</p>
     <h3>Factores de riesgo principales</h3>
     <ul>
       <li><strong>Volatilidad extrema:</strong> Los precios pueden caer o subir más del 50% en horas.</li>
@@ -584,7 +634,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;t
   <div class="success-box">
     <div class="success-icon">🎉</div>
     <h2 id="successName">¡Bienvenido!</h2>
-    <p>Tu solicitud fue recibida. Un asesor de HitaIA se comunicará con vos en <strong>menos de 2 horas</strong> para activar tu cuenta y comenzar a operar.</p>
+    <p>Tu solicitud fue recibida. Un asesor de HitaIA se comunicará con vos en <strong>menos de 2 horas</strong> para activar tu cuenta y comenzar a invertir.</p>
   </div>
 </div>
 
@@ -665,6 +715,20 @@ document.addEventListener('click', function(){
   document.getElementById('ccDropdown').classList.remove('open');
 });
 
+// ── FORM POPUP ──
+function openForm(){
+  document.getElementById('formOverlay').classList.add('popup');
+  document.body.style.overflow='hidden';
+}
+function closeForm(){
+  document.getElementById('formOverlay').classList.remove('popup');
+  document.body.style.overflow='';
+}
+// cerrar popup al click en el fondo
+document.getElementById('formOverlay').addEventListener('click', function(e){
+  if (e.target === this) closeForm();
+});
+
 // ── MODALES ──
 function openModal(id){
   document.getElementById('modal-'+id).classList.add('active');
@@ -675,20 +739,18 @@ function closeModal(id){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape') ['terminos','privacidad','riesgo'].forEach(function(id){
-    document.getElementById('modal-'+id).classList.remove('active');
+  if(e.key==='Escape'){
+    ['terminos','privacidad','riesgo'].forEach(function(id){
+      document.getElementById('modal-'+id).classList.remove('active');
+    });
+    closeForm();
     document.body.style.overflow='';
-  });
+  }
 });
 
-// ── FORM SUBMIT ──
+// ── FORM SUBMIT (envío a HubSpot vía Worker — sin cambios) ──
 function handleSubmit(e) {
   e.preventDefault();
-  var consent = document.getElementById('hitaConsent');
-  if (!consent.checked) {
-    document.getElementById('consentWarn').style.display = 'block';
-    return;
-  }
   document.getElementById('consentWarn').style.display = 'none';
 
   var btn = document.getElementById('submitBtn');
@@ -716,71 +778,43 @@ function handleSubmit(e) {
   })
   .then(function(res){
     btn.disabled = false;
-    btn.textContent = 'Quiero empezar a ganar →';
+    btn.textContent = 'Solicitar información';
     return res.json().then(function(data) {
       if (res.ok || data.status === 'duplicate') {
+        closeForm();
         var overlay = document.getElementById('successOverlay');
         document.getElementById('successName').textContent = '¡Bienvenido, ' + payload.nombre + '!';
         overlay.classList.add('active');
         document.getElementById('hitaForm').reset();
-        consent.checked = false;
         setTimeout(function(){ overlay.classList.remove('active'); }, 6000);
       } else {
-        alert('Hubo un problema al registrar tus datos. Por favor intentá nuevamente.');
+        document.getElementById('consentWarn').style.display = 'block';
         console.error('Worker error:', data);
       }
     });
   })
   .catch(function(err){
     btn.disabled = false;
-    btn.textContent = 'Quiero empezar a ganar →';
+    btn.textContent = 'Solicitar información';
+    document.getElementById('consentWarn').style.display = 'block';
     console.error('Fetch error:', err);
-    alert('Error de conexión. Por favor intentá nuevamente.');
   });
 }
 
-// ── SCROLL TO FORM ──
-function scrollToForm(){
-  document.getElementById('formSection').scrollIntoView({behavior:'smooth',block:'center'});
+// ── ROI CALCULATOR ──
+function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+function updateRoi(){
+  var s = document.getElementById('roiSlider');
+  var dep = parseInt(s.value, 10);
+  var profit = dep * 0.8;            // proyección ilustrativa 60 días (+80%)
+  var balance = dep + profit;
+  var pct = (dep - 250) / (10000 - 250) * 100;
+  s.style.setProperty('--fill', pct + '%');
+  document.getElementById('roiDeposit').textContent = fmt(dep);
+  document.getElementById('roiBalance').textContent = fmt(balance);
+  document.getElementById('roiProfit').textContent = '+' + fmt(profit);
 }
-
-// ── TICKER ──
-var tickerData = [
-  {sym:'BTC/USDT',price:'$63,921',change:'+2.1%',up:true},
-  {sym:'ETH/USDT',price:'$3,287',change:'+1.8%',up:true},
-  {sym:'XAU/USD',price:'$2,351',change:'+0.4%',up:true},
-  {sym:'EUR/USD',price:'$1.0853',change:'-0.2%',up:false},
-  {sym:'WTI',price:'$78.43',change:'+0.9%',up:true},
-  {sym:'SOL/USDT',price:'$142',change:'+3.2%',up:true},
-  {sym:'AAPL',price:'$189',change:'+0.6%',up:true},
-  {sym:'NVDA',price:'$875',change:'+1.4%',up:true},
-  {sym:'XRP/USDT',price:'$0.512',change:'-0.8%',up:false},
-  {sym:'S&P 500',price:'$5,230',change:'+0.3%',up:true},
-];
-var double = tickerData.concat(tickerData);
-var html = double.map(function(t){
-  return '<div class="ticker-item"><span class="ticker-sym">'+t.sym+'</span>'
-    +'<span>'+t.price+'</span>'
-    +'<span class="'+(t.up?'ticker-up':'ticker-down')+'">'+t.change+'</span></div>';
-}).join('');
-document.getElementById('tickerTrack').innerHTML = html;
-
-// ── LIVE USERS COUNTER ──
-var users = 2847;
-setInterval(function(){
-  users += Math.floor(Math.random()*3) - 1;
-  if (users < 2700) users = 2700;
-  document.getElementById('liveUsers').textContent = users.toLocaleString('es-PY');
-}, 5000);
-
-// ── URGENCY SLOTS ──
-var slots = 7;
-setInterval(function(){
-  if (slots > 2 && Math.random() < 0.3) {
-    slots--;
-    document.getElementById('slotsText').innerHTML = 'Solo quedan <strong>'+slots+' lugares</strong> disponibles hoy';
-  }
-}, 45000);
+updateRoi();
 </script>
 </body>
 </html>
